@@ -25,12 +25,15 @@
     <tr>
       <td> <%= request.start_date %> </td>
       <td> <%= request.end_date %> </td>
-      <form action="<%= cat_rental_request_approve_url(@request) %>" method="get">
-      <td><input type="submit" value="Approve"></td>
-      </form>
-      <form action="<%= cat_rental_request_deny_url(@request) %>" method="get">
-      <td><input type="submit" value="Deny"></td>
-      </form>
+      <td> <%= request.status %> </td>
+      <% if request.pending? %>
+        <td><form action="<%= cat_rental_request_approve_url(request) %>" method="post">
+          <input type="hidden" name="_method" value="patch">
+          <input type="submit" value="Approve"></form></td>
+        <td><form action="<%= cat_rental_request_deny_url(request) %>" method="post">
+          <input type="hidden" name="_method" value="patch">
+          <input type="submit" value="Deny"></form></td>
+      <% end %>
     </tr>
     <% end %>
   </table>

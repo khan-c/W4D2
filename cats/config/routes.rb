@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :cat_rental_requests, only: [:new, :create]
 
-  get 'cat_rental_request/:id', to: 'cat_rental_requests#approve', as: 'cat_rental_request_approve'
-  get 'cat_rental_request/:id', to: 'cat_rental_requests#deny', as: 'cat_rental_request_deny'
+  patch 'cat_rental_requests/:id/approve', to: 'cat_rental_requests#approve', as: 'cat_rental_request_approve'
+
+  patch 'cat_rental_requests/:id/deny', to: 'cat_rental_requests#deny', as: 'cat_rental_request_deny'
 end

@@ -17,19 +17,21 @@ class CatRentalRequestsController < ApplicationController
   def approve
     @request = CatRentalRequest.find_by(id: params[:id])
     if @request.approve!
-      redirect_to cat_url(@request.cat_id)
+      redirect_to cats_url
     else
       render json: @request.errors.full_messages
     end
   end
 
   def deny
-
+    @request = CatRentalRequest.find_by(id: params[:id])
+    @request.deny!
+    redirect_to cats_url
   end
 
   private
 
   def request_params
-      params.require(:cat_rental_request).permit(:cat_id,:start_date,:end_date)
+    params.require(:cat_rental_request).permit(:cat_id,:start_date,:end_date)
   end
 end
